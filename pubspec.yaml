@@ -28,6 +28,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   http: ^0.13.3
+  responsive_framework: ^0.1.1
+  responsive_builder: ^0.4.1
+  auto_size_text: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -63,13 +66,15 @@ flutter:
     - family: ZCOOL KuaiLe
       fonts:
         - asset: fonts/ZCOOLKuaiLe-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
+
+    - family: Mate SC
+      fonts:
+        - asset: fonts/MateSC-Regular.ttf
+
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico-Regular.ttf
+
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

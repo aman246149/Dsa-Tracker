@@ -1,117 +1,103 @@
-import 'package:api_fetch/Components/Card.dart';
+// @dart=2.9
+
+import 'package:api_fetch/ResponsiveLayout/HomeScreen/DesktopResponsiveHome.dart';
+import 'package:api_fetch/ResponsiveLayout/HomeScreen/MobileResponsiveHome.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 
 class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+        child: Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.only(left: 15.0, right: 30),
         child: Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: [Colors.blueAccent.shade100, Color(0XFFf2d2fc)])),
-      child: Scaffold(
-        body: Padding(
-          padding: const EdgeInsets.only(left: 15.0, right: 30),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 50.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "😍  😇",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 0.0),
-                        child: Icon(
-                          Icons.bookmark_add_rounded,
-                          size: 40,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 14,
-                  ),
-                  Text(
-                    "Hello Coder",
-                    style: TextStyle(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 50.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "😍  😇",
+                      style: TextStyle(
                         fontSize: 30,
-                        fontWeight: FontWeight.w800,
-                        fontFamily: 'ZCOOLKuaiLe'),
-                  ),
-                  SizedBox(
-                    height: 14,
-                  ),
-                  Text(
-                    "Great day for a new",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  SizedBox(
-                    height: 2,
-                  ),
-                  Text(
-                    "challenge",
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Expanded(
-                    child: GridView.count(
-                      // shrinkWrap: true,
-                      // crossAxisSpacing: 3,
-                      crossAxisCount: 2,
-                      children: [
-                        CardCollection(
-                          sheetname: 'Love Babbar Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                        CardCollection(
-                          sheetname: 'Prepcoading Sheet',
-                          goals: '0',
-                        ),
-                      ],
+                        fontFamily: 'Mate SC',
+                      ),
                     ),
-                  )
-                ],
-              ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 0.0),
+                      child: Icon(
+                        Icons.bookmark_add_rounded,
+                        color: Colors.white,
+                        size: 35,
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: 14,
+                ),
+                AutoSizeText(
+                  "Hello Coder",
+                  minFontSize: 60,
+                  presetFontSizes: [60, 20, 18],
+                  style: TextStyle(
+                      color: Color(0XFF50fa7b),
+                      fontWeight: FontWeight.w800,
+                      fontFamily: 'ZCOOL KuaiLe'),
+                ),
+                SizedBox(
+                  height: 14,
+                ),
+                AutoSizeText(
+                  "Great day for a new",
+                  minFontSize: 40,
+                  presetFontSizes: [40, 20, 18],
+                  style: TextStyle(
+                      color: Color(0XFFdcfd83),
+                      fontSize: 30,
+                      fontFamily: 'Mate SC',
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                AutoSizeText(
+                  "challenge",
+                  minFontSize: 40,
+                  presetFontSizes: [40, 20, 18],
+                  style: TextStyle(
+                      color: Color(0XFFdcfd83),
+                      fontSize: 30,
+                      fontFamily: 'Mate SC',
+                      fontWeight: FontWeight.w800),
+                ),
+                SizedBox(
+                  height: 50,
+                ),
+                Expanded(
+                  child:
+                      ResponsiveBuilder(builder: (context, sizingInformation) {
+                    if (sizingInformation.deviceScreenType ==
+                        DeviceScreenType.desktop)
+                      return DesktopResponsiveHome();
+                    if (sizingInformation.deviceScreenType ==
+                        DeviceScreenType.mobile) {
+                      return MobileResponsiveHome();
+                    } else if (sizingInformation.deviceScreenType ==
+                        DeviceScreenType.tablet) {
+                      return DesktopResponsiveHome();
+                    } else {
+                      return MobileResponsiveHome();
+                    }
+                  }),
+                )
+              ],
             ),
           ),
         ),

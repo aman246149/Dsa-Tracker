@@ -1,4 +1,4 @@
-import 'dart:convert';
+// @dart=2.9
 
 import 'package:flutter/material.dart';
 import 'Screens/HomePage.dart';
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.transparent,
-          primarySwatch: Colors.blue,
-          accentColor: Color(0XFF303030)),
+        scaffoldBackgroundColor: Color(0XFF292636),
+        primarySwatch: Colors.blue,
+      ),
       home: MyHomePage(),
     );
   }

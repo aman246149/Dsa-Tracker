@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
+// @dart=2.9
 
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 
 class CardCollection extends StatelessWidget {
   final String sheetname;
   final String goals;
+  final String target;
 
-  const CardCollection({Key? key, required this.sheetname, required this.goals})
-      : super(key: key);
+  const CardCollection({this.sheetname, this.goals, this.target});
 
   @override
   Widget build(BuildContext context) {
@@ -56,13 +58,10 @@ class CardCollection extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(20))),
-      color: Theme.of(context).accentColor,
+      color: Color(0XFF16151e),
       child: Container(
-        constraints: BoxConstraints(
-          maxHeight: 200,
-          minHeight: 199,
-        ),
         width: MediaQuery.of(context).size.width / 2.3,
+        // height: 500,
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -72,30 +71,56 @@ class CardCollection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  AutoSizeText(
                     sheetname,
-                    style: TextStyle(color: Colors.white, fontSize: 20),
+                    minFontSize: 18,
+                    presetFontSizes: [22, 20, 18],
+                    style: TextStyle(
+                      color: Color(0XFFff9580),
+                      fontFamily: 'Mate SC',
+                    ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Text("${day} ${monthInString}",
-                      style: TextStyle(color: Colors.white)),
+                  AutoSizeText(
+                    "$day $monthInString",
+                    minFontSize: 18,
+                    presetFontSizes: [18, 20, 18],
+                    style: TextStyle(
+                      fontFamily: 'Mate SC',
+                      color: Color(0XFFff80bf),
+                    ),
+                  ),
                 ],
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Goals",
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      Text("${goals}/ 450",
-                          style: TextStyle(color: Colors.white, fontSize: 18))
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AutoSizeText(
+                          "Goals",
+                          minFontSize: 18,
+                          presetFontSizes: [20, 20, 18],
+                          style: TextStyle(
+                            fontFamily: 'Mate SC',
+                            color: Color(0XFFffff80),
+                          ),
+                        ),
+                        AutoSizeText("$goals/ $target",
+                            minFontSize: 18,
+                            presetFontSizes: [18, 18, 16],
+                            style: TextStyle(
+                              fontFamily: 'Mate SC',
+                              color: Color(0XFFffff80),
+                            ))
+                      ],
+                    ),
                   ),
                 ],
               )
