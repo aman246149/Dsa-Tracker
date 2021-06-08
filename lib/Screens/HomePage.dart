@@ -11,11 +11,25 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: Color(0XFF292636),
+      //   title: Center(
+      //     child: Text(
+      //       "DSA TRACKER",
+      //       style: TextStyle(
+      //         fontSize: 35,
+      //         fontFamily: 'Mate SC',
+      //         color: Color(0XFFff9580),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: Padding(
         padding: const EdgeInsets.only(left: 15.0, right: 30),
         child: Container(
           child: Padding(
-            padding: const EdgeInsets.only(top: 50.0),
+            padding: const EdgeInsets.only(top: 35.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
