@@ -1,13 +1,9 @@
 // @dart=2.9
 
-import 'dart:io';
 
-import 'package:api_fetch/data.dart';
-import 'package:api_fetch/model/aman.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
 import 'Screens/HomePage.dart';
 
 Future main() async {

@@ -69,7 +69,6 @@ class _ArrayScreenState extends State<ArrayScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     box.close();
   }

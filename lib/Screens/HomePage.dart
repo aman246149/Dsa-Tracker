@@ -4,7 +4,6 @@ import 'package:api_fetch/ResponsiveLayout/HomeScreen/DesktopResponsiveHome.dart
 import 'package:api_fetch/ResponsiveLayout/HomeScreen/MobileResponsiveHome.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class MyHomePage extends StatefulWidget {

@@ -70,7 +70,6 @@ class _MatrixState extends State<Matrix> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
     box.close();
   }
