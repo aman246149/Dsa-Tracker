@@ -4,9 +4,15 @@ import 'package:api_fetch/ResponsiveLayout/HomeScreen/DesktopResponsiveHome.dart
 import 'package:api_fetch/ResponsiveLayout/HomeScreen/MobileResponsiveHome.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
