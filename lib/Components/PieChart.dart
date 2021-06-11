@@ -4,11 +4,18 @@ import 'package:flutter/gestures.dart';
 import 'Indicator.dart';
 
 class PieChartSample2 extends StatefulWidget {
+  final int arrayLength;
+  final int matrixlength;
+
+  const PieChartSample2(
+      {Key? key, required this.arrayLength, required this.matrixlength})
+      : super(key: key);
+
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }
 
-class PieChart2State extends State {
+class PieChart2State extends State<PieChartSample2> {
   int touchedIndex = -1;
 
   @override
@@ -60,7 +67,7 @@ class PieChart2State extends State {
                 children: const <Widget>[
                   Indicator(
                     color: Color(0xff0293ee),
-                    text: 'First',
+                    text: 'Array',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -68,7 +75,7 @@ class PieChart2State extends State {
                   ),
                   Indicator(
                     color: Color(0xfff8b250),
-                    text: 'Second',
+                    text: 'Matrix',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -77,14 +84,6 @@ class PieChart2State extends State {
                   Indicator(
                     color: Color(0xff845bef),
                     text: 'Third',
-                    isSquare: true,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Indicator(
-                    color: Color(0xff13d385),
-                    text: 'Fourth',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -111,8 +110,8 @@ class PieChart2State extends State {
         case 0:
           return PieChartSectionData(
             color: const Color(0xff0293ee),
-            value: 40,
-            title: '40%',
+            value: widget.arrayLength.toDouble(),
+            title: '${widget.arrayLength.toString()} %',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
@@ -122,8 +121,8 @@ class PieChart2State extends State {
         case 1:
           return PieChartSectionData(
             color: const Color(0xfff8b250),
-            value: 30,
-            title: '30%',
+            value: widget.matrixlength.toDouble(),
+            title: '${widget.matrixlength.toString()} %',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,

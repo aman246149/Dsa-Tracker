@@ -1,12 +1,10 @@
 // @dart=2.9
 
-import 'dart:io';
 import 'package:api_fetch/data.dart';
+import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
-
+import '../../helper/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 
 class ArrayScreen extends StatefulWidget {
   @override
@@ -14,63 +12,46 @@ class ArrayScreen extends StatefulWidget {
 }
 
 class _ArrayScreenState extends State<ArrayScreen> {
-  Box box;
   List arraylist = [];
-  var isChecked = false;
 
-  addToDatabase() async {
-    try {
-      if (await box.get(1).length == null) {
-        box.put(1, array);
-      } else if (await box.get(1).length > 0) {
-        return;
-      }
-    } catch (error) {
-      box.put(1, array);
-    }
+  Helper helpers = new Helper(boxNo: 1, data: array, updateBoxNo: 101);
+
+  updateLengthInLengthBox() {
+    helpers.updateLengthInLengthBox(arraylist);
   }
 
-  void getDataFromDataBase() async {
+  addToDatabase() {
+    helpers.addToDatabase();
+  }
+
+  getDataFromDataBase() async {
+    var helpersarray = await helpers.getDataFromDataBase();
     setState(() {
-      arraylist = box.get(1);
+      arraylist = helpersarray;
     });
   }
 
   updateDataInDataBase(int index, bool value) async {
-    var newArrayList = box.get(1);
-    newArrayList[index]['undefined'] = value;
-    print(newArrayList);
-    await box.put(1, newArrayList);
+    var getUpdateDataFromHelper =
+        await helpers.updateDataInDataBase(index, value);
     setState(() {
-      arraylist = newArrayList;
+      arraylist = getUpdateDataFromHelper;
     });
+    updateLengthInLengthBox();
   }
 
-  Future openBox() async {
-    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+  openBox() async {
+    List helpersarray = await helpers.openBox();
 
-    if (directory != null) {
-    } else {
-      Hive.init(directory.path);
-    }
-
-    box = await Hive.openBox("arrayBox");
-    addToDatabase();
-    getDataFromDataBase();
-
-    return;
+    setState(() {
+      arraylist = helpersarray;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     openBox();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    box.close();
   }
 
   @override
@@ -87,49 +68,44 @@ class _ArrayScreenState extends State<ArrayScreen> {
 
   ListTile buildListTile(int index) {
     return ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-          leading: Container(
-            padding: EdgeInsets.only(right: 12.0),
-            decoration: new BoxDecoration(
-                border: new Border(
-                    right:
-                        new BorderSide(width: 1.0, color: Colors.white24))),
-            child:
-                Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
-          ),
-          title: Text(
-            arraylist[index]['arrayquestion:'].toString(),
-            style:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      leading: Container(
+        padding: EdgeInsets.only(right: 12.0),
+        decoration: new BoxDecoration(
+            border: new Border(
+                right: new BorderSide(width: 1.0, color: Colors.white24))),
+        child: Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
+      ),
+      title: Text(
+        arraylist[index]['arrayquestion:'].toString(),
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      ),
+      // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-          subtitle: Row(
-            children: <Widget>[
-              Icon(Icons.linear_scale, color: Colors.yellowAccent),
-              Text(" Intermediate", style: TextStyle(color: Colors.white))
-            ],
-          ),
-          trailing: Checkbox(
-            onChanged: (value) {
-              setState(() {
-                arraylist[index]['undefined'] = value;
-                // isChecked = value;
-                updateDataInDataBase(index, value);
-              });
-            },
-            value: arraylist[index]['undefined'],
-            fillColor: MaterialStateColor.resolveWith(
-              (states) {
-                if (states.contains(MaterialState.selected)) {
-                  return Colors
-                      .purple; // the color when checkbox is selected;
-                }
-                return Colors.white; //the color when checkbox is unselected;
-              },
-            ),
-          ),
-        );
+      subtitle: Row(
+        children: <Widget>[
+          Icon(Icons.linear_scale, color: Colors.yellowAccent),
+          Text(" Intermediate", style: TextStyle(color: Colors.white))
+        ],
+      ),
+      trailing: Checkbox(
+        onChanged: (value) {
+          setState(() {
+            arraylist[index]['undefined'] = value;
+            // isChecked = value;
+            updateDataInDataBase(index, value);
+          });
+        },
+        value: arraylist[index]['undefined'],
+        fillColor: MaterialStateColor.resolveWith(
+          (states) {
+            if (states.contains(MaterialState.selected)) {
+              return Colors.purple; // the color when checkbox is selected;
+            }
+            return Colors.white; //the color when checkbox is unselected;
+          },
+        ),
+      ),
+    );
   }
 }

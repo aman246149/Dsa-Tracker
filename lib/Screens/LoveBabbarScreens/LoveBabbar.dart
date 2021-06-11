@@ -1,9 +1,15 @@
 // @dart=2.9
 
+import 'dart:io';
+
 import 'package:api_fetch/Components/Card.dart';
+import 'package:api_fetch/Components/PieChart.dart';
 import 'package:api_fetch/Screens/LoveBabbarScreens/ArrayScreen.dart';
 import 'package:api_fetch/Screens/LoveBabbarScreens/Matrix.dart';
+
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart' as pathProvider;
 
 class LoveBabbar extends StatefulWidget {
   @override
@@ -11,11 +17,68 @@ class LoveBabbar extends StatefulWidget {
 }
 
 class _LoveBabbarState extends State<LoveBabbar> {
+  Box lengthBox;
+  List arraylength = [0, 0];
+  List matrixlength = [0, 0];
+
+  openBox() async {
+    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+
+    if (directory != null) {
+    } else {
+      Hive.init(directory.path);
+    }
+
+    lengthBox = await Hive.openBox("lengthBox");
+
+    var forArrayStateupdatevariable = await lengthBox.get(101);
+    print(forArrayStateupdatevariable);
+    var forMatrixStateupdatevariable = await lengthBox.get(102);
+    if (forMatrixStateupdatevariable == null) {
+      print("going");
+
+      setState(() {
+        matrixlength = [1, 1];
+      });
+    } else if (forArrayStateupdatevariable == null) {
+      setState(() {
+        arraylength = [1, 1];
+      });
+    } else if (forMatrixStateupdatevariable == null &&
+        forArrayStateupdatevariable == null) {
+      setState(() {
+        arraylength = [1, 1];
+        matrixlength = [1, 1];
+      });
+    } else {
+      setState(() {
+        arraylength = forArrayStateupdatevariable;
+        matrixlength = forMatrixStateupdatevariable;
+      });
+    }
+    print(matrixlength);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      openBox();
+    });
+    print("callded");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    lengthBox.close();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Container(
+      body: SafeArea(
+          child: Container(
         padding: EdgeInsets.only(top: 10, left: 20, right: 25),
         child: Column(
           children: [
@@ -30,7 +93,10 @@ class _LoveBabbarState extends State<LoveBabbar> {
                     letterSpacing: 5),
               ),
             ),
-            // PieChartSample2(),
+            PieChartSample2(
+              arrayLength: arraylength[0],
+              matrixlength: matrixlength[0],
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 18.0, left: 10, right: 10),
@@ -39,31 +105,39 @@ class _LoveBabbarState extends State<LoveBabbar> {
                   crossAxisCount: 2,
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ArrayScreen(),
-                            ));
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ArrayScreen(),
+                          ),
+                        );
+                        setState(() {
+                          openBox();
+                        });
                       },
                       child: CardCollection(
                         sheetname: 'array',
-                        goals: '500',
-                        target: '400',
+                        goals: arraylength[0].toString(),
+                        target: arraylength[1].toString(),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Matrix(),
-                            ));
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Matrix(),
+                          ),
+                        );
+                        setState(() {
+                          openBox();
+                        });
                       },
                       child: CardCollection(
                         sheetname: 'Matrix',
-                        goals: '500',
-                        target: '400',
+                        goals: matrixlength[0].toString(),
+                        target: matrixlength[1].toString(),
                       ),
                     ),
                     CardCollection(
@@ -137,7 +211,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
             )
           ],
         ),
-      ),
-    ));
+      )),
+    );
   }
 }

@@ -1,12 +1,9 @@
 // @dart=2.9
 
-import 'dart:io';
-
 import 'package:api_fetch/data.dart';
+import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
-import 'package:path_provider/path_provider.dart' as pathProvider;
 
 class Matrix extends StatefulWidget {
   @override
@@ -14,52 +11,43 @@ class Matrix extends StatefulWidget {
 }
 
 class _MatrixState extends State<Matrix> {
-  Box box;
   List arraylist = [];
-  var isChecked = false;
+
+  Helper helpers = new Helper(boxNo: 2, data: matrix, updateBoxNo: 102);
+
+  updateLengthInLengthBox() {
+    helpers.updateLengthInLengthBox(arraylist);
+  }
 
   addToDatabase() async {
-    try {
-      if (await box.get(2).length == null) {
-        box.put(2, matrix);
-      } else if (await box.get(2).length > 0) {
-        return;
-      }
-    } catch (err) {
-      box.put(2, matrix);
-    }
+    helpers.addToDatabase();
   }
 
   void getDataFromDataBase() async {
+    var helpersarray = await helpers.getDataFromDataBase();
+    print(helpersarray);
     setState(() {
-      arraylist = box.get(2);
+      arraylist = helpersarray;
     });
-    print(arraylist);
   }
 
   updateDataInDataBase(int index, bool value) async {
-    var newArrayList = box.get(2);
-    newArrayList[index]['undefined'] = value;
-    print(newArrayList);
-    await box.put(2, newArrayList);
+    var getUpdateDataFromHelper =
+        await helpers.updateDataInDataBase(index, value);
     setState(() {
-      arraylist = newArrayList;
+      arraylist = getUpdateDataFromHelper;
     });
+    print("listipdate");
+    updateLengthInLengthBox();
   }
 
-  Future openBox() async {
-    Directory directory = await pathProvider.getApplicationDocumentsDirectory();
+  openBox() async {
+    List helpersarray = await helpers.openBox();
 
-    if (directory != null) {
-    } else {
-      Hive.init(directory.path);
-    }
-
-    box = await Hive.openBox("arrayBox");
-    addToDatabase();
-    getDataFromDataBase();
-
-    return;
+    setState(() {
+      arraylist = helpersarray;
+    });
+    // updateLengthInLengthBox();
   }
 
   @override
@@ -71,7 +59,6 @@ class _MatrixState extends State<Matrix> {
   @override
   void dispose() {
     super.dispose();
-    box.close();
   }
 
   @override
