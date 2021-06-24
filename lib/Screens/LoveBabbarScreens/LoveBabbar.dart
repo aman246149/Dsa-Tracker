@@ -6,6 +6,8 @@ import 'package:api_fetch/Components/Card.dart';
 import 'package:api_fetch/Components/PieChart.dart';
 import 'package:api_fetch/Screens/LoveBabbarScreens/ArrayScreen.dart';
 import 'package:api_fetch/Screens/LoveBabbarScreens/Matrix.dart';
+import 'package:api_fetch/Screens/LoveBabbarScreens/SearchingAndSort.dart';
+import 'package:api_fetch/Screens/LoveBabbarScreens/Strings.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -20,6 +22,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
   Box lengthBox;
   List arraylength = [0, 0];
   List matrixlength = [0, 0];
+  List stringlength = [0, 0];
 
   openBox() async {
     Directory directory = await pathProvider.getApplicationDocumentsDirectory();
@@ -32,8 +35,8 @@ class _LoveBabbarState extends State<LoveBabbar> {
     lengthBox = await Hive.openBox("lengthBox");
 
     var forArrayStateupdatevariable = await lengthBox.get(101);
-    print(forArrayStateupdatevariable);
     var forMatrixStateupdatevariable = await lengthBox.get(102);
+    var forStringStateupdatevariable = await lengthBox.get(103);
 
     if (forArrayStateupdatevariable == null) {
       setState(() {
@@ -54,7 +57,16 @@ class _LoveBabbarState extends State<LoveBabbar> {
         matrixlength = forMatrixStateupdatevariable;
       });
     }
-    print(matrixlength);
+
+    if (forStringStateupdatevariable == null) {
+      setState(() {
+        stringlength = [1, 1];
+      });
+    } else {
+      setState(() {
+        stringlength = forStringStateupdatevariable;
+      });
+    }
   }
 
   @override
@@ -94,6 +106,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
             PieChartSample2(
               arrayLength: arraylength[0],
               matrixlength: matrixlength[0],
+              stringlength: stringlength[0],
             ),
             Expanded(
               child: Padding(
@@ -138,15 +151,41 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         target: matrixlength[1].toString(),
                       ),
                     ),
-                    CardCollection(
-                      sheetname: 'String',
-                      goals: '500',
-                      target: '400',
+                    GestureDetector(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StringsQue(),
+                          ),
+                        );
+                        setState(() {
+                          openBox();
+                        });
+                      },
+                      child: CardCollection(
+                        sheetname: 'String',
+                        goals: stringlength[0].toString(),
+                        target: stringlength[1].toString(),
+                      ),
                     ),
-                    CardCollection(
-                      sheetname: 'Searching and Sorting',
-                      goals: '500',
-                      target: '400',
+                    GestureDetector(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SearchAndSort(),
+                          ),
+                        );
+                        setState(() {
+                          openBox();
+                        });
+                      },
+                      child: CardCollection(
+                        sheetname: 'Searching and Sorting',
+                        goals: '500',
+                        target: '400',
+                      ),
                     ),
                     CardCollection(
                       sheetname: 'LinkedList',

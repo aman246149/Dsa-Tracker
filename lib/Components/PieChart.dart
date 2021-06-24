@@ -6,9 +6,13 @@ import 'Indicator.dart';
 class PieChartSample2 extends StatefulWidget {
   final int arrayLength;
   final int matrixlength;
+  final int stringlength;
 
   const PieChartSample2(
-      {Key? key, required this.arrayLength, required this.matrixlength})
+      {Key? key,
+      required this.arrayLength,
+      required this.matrixlength,
+      required this.stringlength})
       : super(key: key);
 
   @override
@@ -83,7 +87,7 @@ class PieChart2State extends State<PieChartSample2> {
                   ),
                   Indicator(
                     color: Color(0xff845bef),
-                    text: 'Third',
+                    text: 'Strings',
                     isSquare: true,
                   ),
                   SizedBox(
@@ -132,8 +136,8 @@ class PieChart2State extends State<PieChartSample2> {
         case 2:
           return PieChartSectionData(
             color: const Color(0xff845bef),
-            value: 15,
-            title: '15%',
+            value: widget.stringlength.toDouble(),
+            title: '${widget.stringlength.toString()} %',
             radius: radius,
             titleStyle: TextStyle(
                 fontSize: fontSize,
