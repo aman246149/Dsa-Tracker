@@ -34,25 +34,23 @@ class _LoveBabbarState extends State<LoveBabbar> {
     var forArrayStateupdatevariable = await lengthBox.get(101);
     print(forArrayStateupdatevariable);
     var forMatrixStateupdatevariable = await lengthBox.get(102);
-    if (forMatrixStateupdatevariable == null) {
-      print("going");
 
-      setState(() {
-        matrixlength = [1, 1];
-      });
-    } else if (forArrayStateupdatevariable == null) {
+    if (forArrayStateupdatevariable == null) {
       setState(() {
         arraylength = [1, 1];
-      });
-    } else if (forMatrixStateupdatevariable == null &&
-        forArrayStateupdatevariable == null) {
-      setState(() {
-        arraylength = [1, 1];
-        matrixlength = [1, 1];
       });
     } else {
       setState(() {
         arraylength = forArrayStateupdatevariable;
+      });
+    }
+
+    if (forMatrixStateupdatevariable == null) {
+      setState(() {
+        matrixlength = [1, 1];
+      });
+    } else {
+      setState(() {
         matrixlength = forMatrixStateupdatevariable;
       });
     }

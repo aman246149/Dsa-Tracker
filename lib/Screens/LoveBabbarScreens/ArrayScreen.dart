@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:api_fetch/data.dart';
+import 'package:api_fetch/helper/WebVIewScaffold.dart';
 import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
 import '../../helper/helper.dart';
@@ -76,9 +77,20 @@ class _ArrayScreenState extends State<ArrayScreen> {
                 right: new BorderSide(width: 1.0, color: Colors.white24))),
         child: Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
       ),
-      title: Text(
-        arraylist[index]['arrayquestion:'].toString(),
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      title: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WebViewScaffolda(
+                  url: arraylist[index]['url'],
+                ),
+              ));
+        },
+        child: Text(
+          arraylist[index]['arrayquestion:'].toString(),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 

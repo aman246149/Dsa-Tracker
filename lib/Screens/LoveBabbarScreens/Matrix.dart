@@ -1,6 +1,7 @@
 // @dart=2.9
 
 import 'package:api_fetch/data.dart';
+import 'package:api_fetch/helper/WebVIewScaffold.dart';
 import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,10 @@ class _MatrixState extends State<Matrix> {
     super.dispose();
   }
 
+  callbackName() {
+    print("item get clicked");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,9 +88,20 @@ class _MatrixState extends State<Matrix> {
                 right: new BorderSide(width: 1.0, color: Colors.white24))),
         child: Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
       ),
-      title: Text(
-        arraylist[index]['Questions by Love Babbar:'].toString(),
-        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+      title: GestureDetector(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => WebViewScaffolda(
+                  url: arraylist[index]['url'],
+                ),
+              ));
+        },
+        child: Text(
+          arraylist[index]['Questions by Love Babbar:'].toString(),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
@@ -95,23 +111,28 @@ class _MatrixState extends State<Matrix> {
           Text(" Intermediate", style: TextStyle(color: Colors.white))
         ],
       ),
-      trailing: Checkbox(
-        onChanged: (value) {
-          setState(() {
-            arraylist[index]['undefined'] = value;
-            // isChecked = value;
-            updateDataInDataBase(index, value);
-          });
+      trailing: buildCheckbox(index, () => callbackName),
+    );
+  }
+
+  Checkbox buildCheckbox(int index, Function() callbackFunction) {
+    return Checkbox(
+      onChanged: (value) {
+        callbackFunction();
+        setState(() {
+          arraylist[index]['undefined'] = value;
+          // isChecked = value;
+          updateDataInDataBase(index, value);
+        });
+      },
+      value: arraylist[index]['undefined'],
+      fillColor: MaterialStateColor.resolveWith(
+        (states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.purple; // the color when checkbox is selected;
+          }
+          return Colors.white; //the color when checkbox is unselected;
         },
-        value: arraylist[index]['undefined'],
-        fillColor: MaterialStateColor.resolveWith(
-          (states) {
-            if (states.contains(MaterialState.selected)) {
-              return Colors.purple; // the color when checkbox is selected;
-            }
-            return Colors.white; //the color when checkbox is unselected;
-          },
-        ),
       ),
     );
   }
