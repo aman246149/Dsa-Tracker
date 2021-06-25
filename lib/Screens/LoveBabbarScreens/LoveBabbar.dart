@@ -108,7 +108,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        searchinglength = forStringStateupdatevariable;
+        searchinglength = forSearchingAndSortingupdatevariable;
       });
     }
 
@@ -118,7 +118,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        linkedlength = forStringStateupdatevariable;
+        linkedlength = forLinkedListupdatevariable;
       });
     }
 
@@ -128,7 +128,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        binarylength = forStringStateupdatevariable;
+        binarylength = forBinaryTreeupdatevariable;
       });
     }
 
@@ -138,7 +138,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        bstlength = forStringStateupdatevariable;
+        bstlength = forBInarySEarchupdatevariable;
       });
     }
 
@@ -148,7 +148,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        greedylength = forStringStateupdatevariable;
+        greedylength = forGreedyStateupdatevariable;
       });
     }
 
@@ -158,7 +158,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        backtrackinglength = forStringStateupdatevariable;
+        backtrackinglength = forBackTrackingStateupdatevariable;
       });
     }
 
@@ -168,7 +168,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        stackandquelength = forStringStateupdatevariable;
+        stackandquelength = forStackANdQueuepdatevariable;
       });
     }
 
@@ -178,7 +178,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        heaplength = forStringStateupdatevariable;
+        heaplength = forHeapupdatevariable;
       });
     }
 
@@ -188,7 +188,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        graphlength = forStringStateupdatevariable;
+        graphlength = forGraphStateupdatevariable;
       });
     }
 
@@ -198,7 +198,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        trielength = forStringStateupdatevariable;
+        trielength = forTrieStateupdatevariable;
       });
     }
 
@@ -208,7 +208,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        dynammiclength = forStringStateupdatevariable;
+        dynammiclength = forDynammicPrograStateupdatevariable;
       });
     }
 
@@ -218,7 +218,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
       });
     } else {
       setState(() {
-        bitmanilength = forStringStateupdatevariable;
+        bitmanilength = forBitStateupdatevariable;
       });
     }
   }
