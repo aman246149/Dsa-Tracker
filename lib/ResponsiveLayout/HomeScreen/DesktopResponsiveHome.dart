@@ -34,12 +34,12 @@ class DesktopResponsiveHome extends StatelessWidget {
           target: '250',
         ),
         CardCollection(
-          sheetname: 'Object Oriented Notes',
+          sheetname: 'Oops Notes',
           goals: '0',
           target: '250',
         ),
         CardCollection(
-          sheetname: 'DataBase ManageMent Notes',
+          sheetname: 'DBMS Notes',
           goals: '0',
           target: '250',
         ),

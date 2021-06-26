@@ -33,10 +33,8 @@ class Helper {
     }
 
     var value = [count, arraylist.length];
-    print(value);
 
     try {
-      print("addtodatabaserunning");
 
       if (await box.get(updateBoxNo).length == null) {
         await lengthBox.put(updateBoxNo, value);
@@ -44,7 +42,6 @@ class Helper {
         return;
       }
     } catch (error) {
-      print("addtodatabaserunning");
 
       await lengthBox.put(updateBoxNo, value);
     }
@@ -52,7 +49,6 @@ class Helper {
 
   addToDatabase() async {
     try {
-      print("addtodatabaserunning");
 
       if (await box.get(boxNo).length == null) {
         box.put(boxNo, data);
@@ -60,7 +56,6 @@ class Helper {
         return;
       }
     } catch (error) {
-      print("addtodatabaserunning");
 
       box.put(boxNo, data);
     }
@@ -70,8 +65,6 @@ class Helper {
     // setState(() {
     getDatafromDb = box.get(boxNo);
     // });
-    print("get todatabaserunning");
-    // print(getDatafromDb);
     return getDatafromDb.toList();
     // updateLengthInLengthBox(arraylist);
   }
@@ -87,7 +80,6 @@ class Helper {
   }
 
   Future<List> openBox() async {
-    print("openboxrunning");
     Directory directory = await pathProvider.getApplicationDocumentsDirectory();
 
     if (directory != null) {

@@ -1,10 +1,10 @@
 // @dart=2.9
 
 import 'package:api_fetch/data.dart';
-import 'package:api_fetch/helper/WebVIewScaffold.dart';
 import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class StackAndQueue extends StatefulWidget {
   @override
@@ -14,7 +14,8 @@ class StackAndQueue extends StatefulWidget {
 class _StackAndQueueState extends State<StackAndQueue> {
   List arraylist = [];
 
-  Helper helpers = new Helper(boxNo: 10, data: stackandqueue, updateBoxNo: 1010);
+  Helper helpers =
+      new Helper(boxNo: 10, data: stackandqueue, updateBoxNo: 1010);
 
   updateLengthInLengthBox() {
     helpers.updateLengthInLengthBox(arraylist);
@@ -89,14 +90,10 @@ class _StackAndQueueState extends State<StackAndQueue> {
         child: Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
       ),
       title: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => WebViewScaffolda(
-                  url: arraylist[index]['url'],
-                ),
-              ));
+        onTap: () async {
+          await canLaunch(arraylist[index]['url'])
+              ? await launch(arraylist[index]['url'])
+              : throw 'Could not launch';
         },
         child: Text(
           arraylist[index]['Questions by Love Babbar:'].toString(),
@@ -105,11 +102,18 @@ class _StackAndQueueState extends State<StackAndQueue> {
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-      subtitle: Row(
-        children: <Widget>[
-          Icon(Icons.linear_scale, color: Colors.yellowAccent),
-          Text(" Intermediate", style: TextStyle(color: Colors.white))
-        ],
+      subtitle: GestureDetector(
+        onTap: () async {
+          await canLaunch(arraylist[index]['url'])
+              ? await launch(arraylist[index]['url'])
+              : throw 'Could not launch';
+        },
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.linear_scale, color: Colors.yellowAccent),
+            Text(" Intermediate", style: TextStyle(color: Colors.white))
+          ],
+        ),
       ),
       trailing: buildCheckbox(index, () => callbackName),
     );

@@ -67,7 +67,7 @@ class MobileResponsiveHome extends StatelessWidget {
             MaterialPageRoute(builder: (context) => Objectoriented()),
           ),
           child: CardCollection(
-            sheetname: 'Object Oriented Sheet',
+            sheetname: 'OOPS Sheet',
             goals: '0',
             target: '250',
           ),
@@ -78,7 +78,7 @@ class MobileResponsiveHome extends StatelessWidget {
             MaterialPageRoute(builder: (context) => Dbms()),
           ),
           child: CardCollection(
-            sheetname: 'DataBase ManageMent Sheet',
+            sheetname: 'DBMS Sheet',
             goals: '0',
             target: '250',
           ),

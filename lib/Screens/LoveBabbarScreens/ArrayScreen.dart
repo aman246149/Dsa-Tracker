@@ -1,9 +1,9 @@
 // @dart=2.9
 
 import 'package:api_fetch/data.dart';
-import 'package:api_fetch/helper/WebVIewScaffold.dart';
 import 'package:api_fetch/helper/helper.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../helper/helper.dart';
 import 'package:flutter/material.dart';
 
@@ -78,14 +78,10 @@ class _ArrayScreenState extends State<ArrayScreen> {
         child: Icon(CupertinoIcons.arrow_2_squarepath, color: Colors.white),
       ),
       title: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => WebViewScaffolda(
-                  url: arraylist[index]['url'],
-                ),
-              ));
+        onTap: () async {
+          await canLaunch(arraylist[index]['url'])
+              ? await launch(arraylist[index]['url'])
+              : throw 'Could not launch';
         },
         child: Text(
           arraylist[index]['arrayquestion:'].toString(),
@@ -94,11 +90,18 @@ class _ArrayScreenState extends State<ArrayScreen> {
       ),
       // subtitle: Text("Intermediate", style: TextStyle(color: Colors.white)),
 
-      subtitle: Row(
-        children: <Widget>[
-          Icon(Icons.linear_scale, color: Colors.yellowAccent),
-          Text(" Intermediate", style: TextStyle(color: Colors.white))
-        ],
+      subtitle: GestureDetector(
+        onTap: () async {
+          await canLaunch(arraylist[index]['url'])
+              ? await launch(arraylist[index]['url'])
+              : throw 'Could not launch';
+        },
+        child: Row(
+          children: <Widget>[
+            Icon(Icons.linear_scale, color: Colors.yellowAccent),
+            Text(" Intermediate", style: TextStyle(color: Colors.white))
+          ],
+        ),
       ),
       trailing: Checkbox(
         onChanged: (value) {

@@ -229,7 +229,6 @@ class _LoveBabbarState extends State<LoveBabbar> {
     setState(() {
       openBox();
     });
-    print("callded");
   }
 
   @override
@@ -331,7 +330,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'Searching and Sorting',
+                        sheetname: 'Sorting',
                         goals: searchinglength[0].toString(),
                         target: searchinglength[1].toString(),
                       ),
@@ -385,7 +384,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'BinarySearchTress',
+                        sheetname: 'BST',
                         goals: bstlength[0].toString(),
                         target: bstlength[1].toString(),
                       ),
@@ -421,7 +420,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'BackTracking',
+                        sheetname: 'BackTrack',
                         goals: backtrackinglength[0].toString(),
                         target: backtrackinglength[1].toString(),
                       ),
@@ -439,7 +438,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'StackAndQueues',
+                        sheetname: 'Stack',
                         goals: stackandquelength[0].toString(),
                         target: stackandquelength[1].toString(),
                       ),
@@ -511,7 +510,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'DynamicProgramming',
+                        sheetname: 'DP',
                         goals: dynammiclength[0].toString(),
                         target: dynammiclength[1].toString(),
                       ),
@@ -529,7 +528,7 @@ class _LoveBabbarState extends State<LoveBabbar> {
                         });
                       },
                       child: CardCollection(
-                        sheetname: 'BitManipulation',
+                        sheetname: 'BIT MANIP',
                         goals: bitmanilength[0].toString(),
                         target: bitmanilength[1].toString(),
                       ),
